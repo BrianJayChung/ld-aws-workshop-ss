@@ -1,0 +1,77 @@
+{% block footer %}
+    <!-- ** *Note* LaunchDarkly is initialized in the header ** -->
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ url_for('static', filename='light/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="{{ url_for('static', filename='light/vendor/metisMenu/metisMenu.min.js') }}"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="{{ url_for('static', filename='light/vendor/raphael/raphael.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='light/vendor/morrisjs/morris.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='light/data/morris-data.js') }}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{{ url_for('static', filename='light/dist/js/sb-admin-2.js') }}"></script>
+   <script>
+       // Show Widgets Code
+       var displayWidget = document.getElementById('widgets');
+       var renderButton = function() {
+            var showFeature = ldclient.variation("show-widgets", false);
+            var displayWidget = document.getElementById('widgets');
+            if (displayWidget) {
+                if (showFeature) {
+                    displayWidget.style.display = "block";
+                } else {
+                    displayWidget.style.display = "none";
+                }
+            }
+       }
+
+       // ChatBox Code
+       var renderChatbox = function() {
+           var showFeature = ldclient.variation("chatbox", false);
+
+           if (showFeature) {
+               (function($) {
+                    $(document).ready(function() {
+                        var $chatbox = $('.chatbox'),
+                            $chatboxTitle = $('.chatbox__title'),
+                            $chatboxTitleClose = $('.chatbox__title__close'),
+                            $chatboxCredentials = $('.chatbox__credentials');
+                        $chatbox.removeClass('chatbox--closed', 'chatbox--tray').css('display', 'block');
+                        $chatboxTitle.on('click', function() {
+                            $chatbox.toggleClass('chatbox--tray');
+                        });
+                        $chatboxTitleClose.on('click', function(e) {
+                            e.stopPropagation();
+                            $chatbox.addClass('chatbox--closed');
+                        });
+                        $chatbox.on('transitionend', function() {
+                            if ($chatbox.hasClass('chatbox--closed')) $chatbox.slideDown();
+                        });
+                        setTimeout(function(){ $chatboxTitle.trigger('click'); }, 700);
+                    });
+                })(jQuery);
+           } else {
+            $('.chatbox').hide();
+           }
+       }
+
+       // LD Client Rendering
+       ldclient.waitForInitialization().then(function() {
+            console.log("It's now safe to request feature flags");
+            console.log(ldclient);
+            renderButton();
+            renderChatbox()
+       })
+
+       ldclient.on('change', function() {
+           console.log('Updating show-widgets')
+           renderButton();
+           renderChatbox();
+       });
+
+</script>
+{% endblock %}

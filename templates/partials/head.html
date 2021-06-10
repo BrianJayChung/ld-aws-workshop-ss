@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://unpkg.com/launchdarkly-js-client-sdk@2"></script>
+  </head>
+  <body>
+    <script>
+    // Example hardcoded user context
+      var user = {
+        "firstName": "Bob",
+        "lastName": "Loblaw",
+        "key": "012345",
+        "custom": {
+          "plan": "free",
+          "state": "CA",
+          "age": "27",
+          "devices": ["ios", "android", "web"]
+        }
+      };
+
+      var ldclient = LDClient.initialize('5c48fafe806cbb419f2c6bd7', user);
+    </script>
+  </body>
+</html>

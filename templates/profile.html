@@ -1,0 +1,53 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+<div id="wrapper">
+    <!-- Navigation -->
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">User Profile</h3>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">User Attributes</div>
+                <div class="panel-body">
+                    <p>The user attributes, for more information please visit: <a href="https://docs.launchdarkly.com/home/users/attributes">Setting user attributes</a>
+                    </p>
+                </div>
+                
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        key: 012345
+                    </li>
+                    <li class="list-group-item">
+                        firstName: Bob
+                    </li>
+                    <li class="list-group-item">
+                        lastName: Loblaw
+                    </li>  
+                    <li class="list-group-item">
+                        email: bob@example.com
+                    </li>
+                    <li class="list-group-item">
+                        plan: free
+                    </li>
+                    <li class="list-group-item">
+                        state: CA
+                    </li>
+                    <li class="list-group-item">
+                        age: 27
+                    </li>     
+                    <li class="list-group-item">
+                        devices: ["ios", "android", "web"]
+                    </li>
+                                       
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-wrapper -->
+</div> 
+{% endblock %}
