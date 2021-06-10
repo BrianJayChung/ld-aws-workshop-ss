@@ -9,17 +9,17 @@ MESSAGE = "Hello, " + "brian" + "!"
 print("Message: '" + MESSAGE + "'")
 
 app = Flask(__name__)
-
+CLIENT_ID = os.environ.get("CLIENT_ID")
 
 @app.route("/")
 def root():
   print("Handling web request. Returning message.")
   result = MESSAGE.encode("utf-8")
-  return render_template("main-dashboard.html")
+  return render_template("main-dashboard.html", client_id=CLIENT_ID)
 
 @app.route("/dashboard")
 def dashboard():
-  return render_template("main-dashboard.html")
+  return render_template("main-dashboard.html", client_id=CLIENT_ID)
 
 @app.route("/profile")
 def profile():

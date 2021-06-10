@@ -1,3 +1,5 @@
+{% block header %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,7 +21,8 @@
         }
       };
 
-      var ldclient = LDClient.initialize('5c48fafe806cbb419f2c6bd7', user);
+      var ldclient = LDClient.initialize("{{ client_id }}", user);
     </script>
   </body>
 </html>
+{% endblock %}
